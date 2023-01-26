@@ -16,6 +16,8 @@ if cd nim-1.6.10; then
     cd
 fi
 
+git clone -b "$checkout" https://github.com/arturo-lang/arturo
+
 if cd arturo; then
     ./build.nims install
 fi
