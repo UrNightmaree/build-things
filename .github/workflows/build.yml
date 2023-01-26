@@ -33,9 +33,7 @@ jobs:
           githubToken: ${{ github.token }}
 
           setup: |
-            if [[ ! '${{ github.event.inputs.build }}' =  'arturo']]; then
-              mkdir -p "/home/runner/artifacts"
-            fi
+            mkdir -p "/home/runner/artifacts"
 
           dockerRunArgs: |
             --volume "/home/runner/artifacts:/artifacts"
