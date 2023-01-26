@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Building ${{ github.event.inputs.build }}
+    name: Building ${{ github.event.inputs.build }} for ${{ matrix.target_arch }}
     permissions:
       contents: read
     runs-on: ubuntu-22.04
@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Building
-        uses: uraimo/run-on-arch-action@v2
+        uses: uraimo/run-on-arch-action@v2.5.0
         with:
           arch: ${{ matrix.target_arch }}
           distro: ubuntu22.04
