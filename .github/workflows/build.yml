@@ -22,7 +22,7 @@ jobs:
 
       - name: Building
         run: |
-          bash scripts/build-${{ github.event.input.build }}.sh
+          bash scripts/build-${{ github.event.inputs.build }}.sh
 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
