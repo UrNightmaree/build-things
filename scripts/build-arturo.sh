@@ -12,7 +12,7 @@ curl -Lo- https://nim-lang.org/download/nim-1.6.10.tar.xz | tar Jxv
 
 if cd nim-1.6.10; then
     ./build.sh
-    ./install.sh || sudo ./install.sh
+    sudo ./install.sh /usr/bin
     cd
 fi
 
