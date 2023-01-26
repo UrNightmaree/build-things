@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
-        target_arch: [aarch64, armv7, x86_64]
+        target_arch: [aarch64, armv7]
       fail-fast: false
     steps:
       - name: Clone repository
@@ -28,7 +28,7 @@ jobs:
         uses: uraimo/run-on-arch-action@v2
         with:
           arch: ${{ matrix.target_arch }}
-          distro: ubuntu-22.04
+          distro: ubuntu22.04
 
           githubToken: ${{ github.token }}
 
