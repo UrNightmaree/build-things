@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "what to build"
+        required: true
+
+jobs:
+  build:
+    permissions:
+      contents: read
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix: 
+        target_arch: [aarch64, arm, i686, x86_64]
+      fail-fast: false
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Building
+        run: |
+          bash scripts/build-${{ github.event.build }}.sh
+
+      - name: Upload build result(s) as artifacts
+        uses: actions/upload-artifacts@v3
+        with:
+          name: ${{ github.event.build }}-${{ matrix.target_arch }}
+          path: ${{ env.BUILD_RESULT }}
+
+
