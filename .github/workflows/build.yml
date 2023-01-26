@@ -43,6 +43,7 @@ jobs:
           shell: /bin/sh
 
           install: |
+            apt-get update -qy
             apt-get install bash libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev -qy
 
           run: |
