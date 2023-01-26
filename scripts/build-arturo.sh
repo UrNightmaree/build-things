@@ -6,7 +6,7 @@ checkout="${1:-master}"
 
 git clone -b "$checkout" https://github.com/arturo-lang/arturo
 
-sudo apt install libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev
+sudo apt install libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev  nim make
 
 if cd arturo; then
     command -v make >/dev/null && {
