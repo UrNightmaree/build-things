@@ -38,7 +38,7 @@ jobs:
             --volume "$HOME/artifacts:/artifacts"
             --volume "$HOME/work/build-things/build-things:/root-repo"
 
-          shell: /bin/sh
+          shell: /bin/bash
 
           install: |
             apt-get update -qy
