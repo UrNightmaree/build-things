@@ -9,7 +9,7 @@ curl -Lo- https://nim-lang.org/download/nim-1.6.10.tar.xz | tar Jxv
 fast_cmd() {
     tee m <<< "
 .PHONY: all
-.RECIPEPREFIX = \" \"
+.RECIPEPREFIX = "'"'" "'"'"
 
 all:
     $*"
