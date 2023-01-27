@@ -41,8 +41,8 @@ jobs:
           shell: /bin/sh
 
           install: |
-            sudo apt-get update -qy
-            sudo apt install build-essential git curl -qy
+            apt-get update -qy
+            apt install build-essential git curl sudo -qy
 
           run: |
             cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
