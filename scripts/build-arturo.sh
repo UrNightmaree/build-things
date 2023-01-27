@@ -22,5 +22,5 @@ git clone -b "$checkout" https://github.com/arturo-lang/arturo
 
 if cd arturo; then
     ./build.nims install
-    cp ~/.arturo/bin/arturo  ~/artifacts
+    cp ~/.arturo/bin/arturo  /artifacts
 fi
