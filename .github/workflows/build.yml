@@ -18,22 +18,36 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
-        arch: [arm, arm64]
+        arch: [armv7, aarch64]
       fail-fast: false
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
-
       - name: Building
-        run: |
-          mkdir ~/artifacts -p
-          bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
-        
+        uses: uraimo/run-on-arch-action@v2.5.0
+        with:
+          arch: ${{ matrix.arch }}
+          distro: ubuntu22.04
+
+          githubToken: ${{ github.token }}
+
+          setup: |
+            mkdir -p ~/artifacts
+
+          dockerRunArgs: |
+            --volume "$HOME/artifacts:/artifacts"
+            --volume "$HOME/work/build-things/build-things:/root-repo"
+
+          shell: /bin/sh
+
+          install: |
+            sudo apt-get update -qy
+            sudo apt install build-essential git curl -qy
+
+          run: |
+            cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+                  
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
         with:
