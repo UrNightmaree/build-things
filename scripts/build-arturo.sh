@@ -21,7 +21,9 @@ all:
     $*
 
 .PHONY: all"
-    make -j8 -f m
+    if ! make -j $(nproc) -f m; then
+        return 1
+    fi
     rm m -f
 }
 
