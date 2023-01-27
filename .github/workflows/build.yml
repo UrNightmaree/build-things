@@ -42,9 +42,11 @@ jobs:
 
           install: |
             apt-get update -qy
-            apt-get install bash libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev -qy
+            apt-get install bash git libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev -qy
 
           run: |
+            git clone https://github.com/UrNightmaree/build-things root-repo
+            cd root-repo
             bash scripts/build-${{ github.event.inputs.build }} ${{ github.event.inputs.args }}
 
       - name: Upload build result(s) as artifacts
