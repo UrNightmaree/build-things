@@ -12,7 +12,6 @@ on:
 
 jobs:
   build:
-    name: Building ${{ github.event.inputs.build }} for ${{ matrix.arch }}
     permissions:
       contents: read
     runs-on: ubuntu-22.04
