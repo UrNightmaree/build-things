@@ -18,7 +18,7 @@ sudo apt-get install \
 fast_cmd() {
     tee m <<< "
 all:
-    $1
+    $*
 
 .PHONY: all"
     make -j8 -f m
@@ -26,7 +26,7 @@ all:
 }
 
 if cd nim-1.6.10; then
-    ./build.sh || exit 1
+    fast_cmd ./build.sh || exit 1
     sudo ./install.sh /usr/bin || ./install.sh /usr/bin
     cd
 fi
@@ -34,6 +34,6 @@ fi
 git clone -b "$checkout" https://github.com/arturo-lang/arturo
 
 if cd arturo; then
-    ./build.nims install log || exit 1
+    fast_cmd ./build.nims install log || exit 1
     cp ~/.arturo/bin/arturo  /artifacts
 fi
