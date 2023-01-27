@@ -12,45 +12,30 @@ on:
 
 jobs:
   build:
-    name: Building ${{ github.event.inputs.build }} for ${{ matrix.target_arch }}
+    name: Building ${{ github.event.inputs.build }} for ${{ matrix.arch }}
     permissions:
       contents: read
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
-        target_arch: [aarch64, armv7]
+        arch: [arm, arm64]
       fail-fast: false
     steps:
       - name: Clone repository
         uses: actions/checkout@v3
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install gcc-arm-linux-gnueabihf gcc-aarch64-linux-gnu
+
       - name: Building
-        uses: uraimo/run-on-arch-action@v2.5.0
-        with:
-          arch: ${{ matrix.target_arch }}
-          distro: ubuntu22.04
-
-          githubToken: ${{ github.token }}
-
-          setup: |
-            mkdir -p "/home/runner/artifacts"
-
-          dockerRunArgs: |
-            --volume "/home/runner/artifacts:/artifacts"
-
-          shell: /bin/sh
-
-          install: |
-            apt-get update -qy
-            apt-get install bash git libgmp-dev libmpfr-dev libgtk-3-dev libwebkit2gtk-4.0-dev -qy
-
-          run: |
-            git clone https://github.com/UrNightmaree/build-things root-repo
-            cd root-repo
-            bash scripts/build-${{ github.event.inputs.build }} ${{ github.event.inputs.args }}
-
+        run: |
+          mkdir ~/artifacts -p
+          bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+        
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.inputs.build }}-${{ matrix.target_arch }}
-          path: /home/runner/artifacts
+          name: ${{ github.event.inputs.build }}-${{ matrix.arch }}
+          path: ~/artifacts
