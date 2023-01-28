@@ -32,7 +32,7 @@ jobs:
         with:
           base_image: ${{ matrix.base-image }}:2022-04-04
           copy_repository_path: /root-repo
-          copy_artifact_path: /artifacts
+          copy_artifact_path: artifacts
           copy_artifact_dest: ~/artifacts
 
           shell: /bin/bash
