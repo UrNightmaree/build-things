@@ -14,5 +14,5 @@ if cd lua; then
     mkdir -p "/artifacts/"{bin,lib,include}
     cp lua /artifacts/bin
     cp liblua.a /artifacts/lib
-    cp lua.h liblua.h lauxlib.h /artifacts/include
+    cp lua.h lualib.h lauxlib.h /artifacts/include
 fi
