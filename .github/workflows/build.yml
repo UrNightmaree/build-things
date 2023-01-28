@@ -52,11 +52,11 @@ jobs:
               
               git clone https://github.com/UrNightmaree/build-things
               [[ -e build-things/scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
-                bash build-things/scripts/install-deps-${{ github.event.inputs.build }}.sh
+                cd build-things && bash scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
  
           run: |
-            cd bash build-things/scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd build-things && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
