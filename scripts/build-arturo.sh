@@ -16,11 +16,6 @@ if cd nim-1.6.10; then
     cd || exit
 fi
 
-sudoo apt-get install \
-    libgtk-3-dev libwebkit2gtk-4.0-dev  \
-    libmpfr-dev libgmp-dev  \
-    -qy
-
 git clone https://github.com/arturo-lang/arturo
 
 if cd arturo; then
