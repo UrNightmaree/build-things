@@ -45,6 +45,7 @@ jobs:
           shell: /bin/bash
  
           install: |
+            ls /
             apt-get update -qy
             apt-get install curl git -qy
  
