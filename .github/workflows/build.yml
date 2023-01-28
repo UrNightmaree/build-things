@@ -9,6 +9,10 @@ on:
       args:
         description: "args passed to build-*.sh"
         required: false
+      skip-installing-deps:
+        description: "skip installing deps (for debugging only)"
+        required: false
+        type: boolean
 
 jobs:
   build:
@@ -42,11 +46,13 @@ jobs:
 
           install: |
             apt-get update -qy
-            apt-get install build-essential git curl sudo -qy
+            if ! ${{ github.event.inputs.skip-installing-deps }}; then
+              apt-get install build-essential git curl sudo -qy
+            fi
 
           run: |
             cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
-                  
+                
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
         with:
