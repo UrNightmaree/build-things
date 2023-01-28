@@ -57,7 +57,7 @@ jobs:
             fi
  
           run: |
-            cd build-things && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd /root/build-things && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
