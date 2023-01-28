@@ -46,8 +46,10 @@ jobs:
 
           install: |
             apt-get update -qy
+            apt-get install curl git -qy
+
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
-              apt-get install build-essential git curl sudo -qy
+              apt-get install build-essential
             fi
 
           run: |

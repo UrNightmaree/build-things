@@ -16,7 +16,7 @@ if cd nim-1.6.10; then
     cd || exit
 fi
 
-sudo apt-get install \
+apt-get install \
     libgtk-3-dev libwebkit2gtk-4.0-dev  \
     libmpfr-dev libgmp-dev  \
     -qy
