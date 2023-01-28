@@ -37,16 +37,16 @@ jobs:
 
           shell: /bin/bash
           commands: |
+            # Disable IPv6 in case it is configured but does not work
+            ping6 -c 1 www.ietf.org || sudo sysctl -w net.ipv6.conf.eth0.disable_ipv6=1
             mkdir -p ~/artifacts
-            ############################
             sudo apt-get update -qy
             sudo apt-get install curl git -qy
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
               sudo apt-get install build-essential -qy
             fi
-            ############################
-            cd /root-repo && \
-              bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd /root-repo
+            bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
 
 
 
@@ -80,5 +80,5 @@ jobs:
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.inputs.build }}-${{ matrix.arch }}
+          name: ${{ github.event.inputs.build }}-(${{ matrix.base-image }})
           path: ~/artifacts
