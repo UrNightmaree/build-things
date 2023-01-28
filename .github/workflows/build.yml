@@ -40,24 +40,23 @@ jobs:
  
           dockerRunArgs: |
             --volume "$HOME/artifacts:/artifacts"
-            --volume "$HOME/work/build-things/build-things:/root-repo"
  
           shell: /bin/bash
  
           install: |
-            ls /
             apt-get update -qy
             apt-get install curl git -qy
  
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
               apt-get install build-essential -qy
-              if [[ -e /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh ]]; then
-                bash /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh
-              fi
+              
+              git clone https://github.com/UrNightmaree/build-things
+              [[ -e build-things/scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
+                bash build-things/scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
  
           run: |
-            cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd bash build-things/scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
