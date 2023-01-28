@@ -13,7 +13,7 @@ fast_cmd() {
 
 all:
 > $*"
-    if ! make -j $(nproc) -f m; then
+    if ! make -j16 -f m; then
         return 1
     fi
     rm m -f
