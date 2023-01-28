@@ -50,12 +50,12 @@ jobs:
  
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
               apt-get install build-essential -qy
-              [[ -e scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
-                scripts/install-deps-${{ github.event.inputs.build }}.sh
+              if [[ -e /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh ]]; then
+                bash /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
  
           run: |
-            cd /root-repo && scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
