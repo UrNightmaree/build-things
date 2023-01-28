@@ -2,27 +2,18 @@
 
 # a script for building Arturo (latest/nightly)
 
+. scripts/util-cmd.sh
+
 checkout="${1:-master}"
+
+###
  
 curl -Lo- https://nim-lang.org/download/nim-1.6.10.tar.xz | tar Jxv
 
-fast_cmd() {
-    tee m <<< "
-.PHONY: all
-.RECIPEPREFIX = >
-
-all:
-> $*"
-    if ! make -j16 -f m; then
-        return 1
-    fi
-    rm m -f
-}
-
 if cd nim-1.6.10; then
-    fast_cmd ./build.sh || exit 1
+    fast_cmd ./build.sh
     sudo ./install.sh /usr/bin || ./install.sh /usr/bin
-    cd
+    cd || exit
 fi
 
 sudo apt-get install \
@@ -30,9 +21,10 @@ sudo apt-get install \
     libmpfr-dev libgmp-dev  \
     -qy
 
-git clone -b "$checkout" https://github.com/arturo-lang/arturo
+git clone https://github.com/arturo-lang/arturo
 
 if cd arturo; then
-    fast_cmd ./build.nims install log || exit 1
+    git checkout "$checkout"
+    fast_cmd ./build.nims install log
     cp ~/.arturo/bin/arturo  /artifacts
 fi
