@@ -28,54 +28,32 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Building
-        uses: pguyot/arm-runner-action@v2.5.2
+        uses: uraimo/run-on-arch-action@v2.5.0
         with:
-          base_image: ${{ matrix.base-image }}:2022-04-04
-          copy_repository_path: /root-repo
-          copy_artifact_path: artifacts
-          copy_artifact_dest: ~/artifacts
-
-          shell: /bin/bash
-          commands: |
-            # Disable IPv6 in case it is configured but does not work
-            ping6 -c 1 www.ietf.org || sudo sysctl -w net.ipv6.conf.eth0.disable_ipv6=1
+          arch: ${{ matrix.arch }}
+          distro: bullseye
+ 
+          githubToken: ${{ github.token }}
+ 
+          setup: |
             mkdir -p ~/artifacts
-            sudo apt-get update -qy
-            sudo apt-get install curl git -qy
+ 
+          dockerRunArgs: |
+            --volume "$HOME/artifacts:/artifacts"
+            --volume "$HOME/work/build-things/build-things:/root-repo"
+ 
+          shell: /bin/bash
+ 
+          install: |
+            apt-get update -qy
+            apt-get install curl git -qy
+ 
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
-              sudo apt-get install build-essential -qy
+              apt-get install build-essential -qy
             fi
-            cd /root-repo
-            bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
-
-
-
-#       uses: uraimo/run-on-arch-action@v2.5.0
-#       with:
-#         arch: ${{ matrix.arch }}
-#         distro: bullseye
-#
-#         githubToken: ${{ github.token }}
-#
-#         setup: |
-#           mkdir -p ~/artifacts
-#
-#         dockerRunArgs: |
-#           --volume "$HOME/artifacts:/artifacts"
-#           --volume "$HOME/work/build-things/build-things:/root-repo"
-#
-#         shell: /bin/bash
-#
-#         install: |
-#           apt-get update -qy
-#           apt-get install curl git -qy
-#
-#           if ! ${{ github.event.inputs.skip-installing-deps }}; then
-#             apt-get install build-essential -qy
-#           fi
-#
-#         run: |
-#           cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+ 
+          run: |
+            cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
