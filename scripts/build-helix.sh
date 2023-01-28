@@ -6,14 +6,15 @@ checkout="${1:-master}"
 
 . scripts/util-cmd.sh
 
-###
 
-curl -sSf https://sh.rustup.rs  \
-    > rustup.sh
-sh rustup.sh -y
+#curl -sSf https://sh.rustup.rs  \
+#    > rustup.sh
+#sh rustup.sh -y
+#
+## shellcheck source=/dev/null
+#source "$HOME/.cargo/env"
 
-# shellcheck source=/dev/null
-source "$HOME/.cargo/env"
+sudoo apt-get install rustc cargo -qy
 
 git clone https://github.com/helix-editor/helix
 
