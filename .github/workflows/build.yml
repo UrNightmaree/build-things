@@ -36,7 +36,7 @@ jobs:
           copy_artifact_dest: ~/artifacts
 
           shell: /bin/bash
-          command: |
+          commands: |
             mkdir -p ~/artifacts
             ############################
             sudo apt-get update -qy
