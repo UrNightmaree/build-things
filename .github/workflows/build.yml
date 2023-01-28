@@ -40,6 +40,7 @@ jobs:
  
           dockerRunArgs: |
             --volume "$HOME/artifacts:/artifacts"
+            --volume "$HOME/build-things/build-things:/build-things"
  
           shell: /bin/bash
  
@@ -56,7 +57,7 @@ jobs:
             fi
  
           run: |
-            cd build-things && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
+            cd /build-things && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
                 
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
