@@ -52,6 +52,7 @@ jobs:
               apt-get install build-essential -qy
               if [[ -e /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh ]]; then
                 bash /root-repo/scripts/install-deps-${{ github.event.inputs.build }}.sh
+              fi
             fi
  
           run: |
