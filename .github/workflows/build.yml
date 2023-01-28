@@ -27,7 +27,7 @@ jobs:
         uses: uraimo/run-on-arch-action@v2.5.0
         with:
           arch: ${{ matrix.arch }}
-          distro: ubuntu22.04
+          distro: bullseye
 
           githubToken: ${{ github.token }}
 
@@ -42,7 +42,7 @@ jobs:
 
           install: |
             apt-get update -qy
-            apt install build-essential git curl sudo -qy
+            apt-get install build-essential git curl sudo -qy
 
           run: |
             cd /root-repo && bash scripts/build-${{ github.event.inputs.build }}.sh ${{ github.event.inputs.args }}
