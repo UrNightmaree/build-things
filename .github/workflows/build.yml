@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix: 
-        base-image: [raspios_lite, raspios_lite_arm64]
+        arch: [armv7, aarch64]
       fail-fast: false
     steps:
       - name: Clone repository
@@ -58,5 +58,5 @@ jobs:
       - name: Upload build result(s) as artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.inputs.build }}-(${{ matrix.base-image }})
+          name: ${{ github.event.inputs.build }}-${{ matrix.arch }}
           path: ~/artifacts
