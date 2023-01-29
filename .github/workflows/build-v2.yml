@@ -36,6 +36,7 @@ jobs:
           shell: /bin/bash
           bind_mount_repository: true
           copy_repository_path: /root-repo
+          copy_artifact_path: artifacts
           copy_artifact_dest: $HOME/artifacts
           commands: |
             mkdir -p artifacts
