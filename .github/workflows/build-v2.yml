@@ -38,8 +38,6 @@ jobs:
           copy_repository_path: /root-repo
           commands: |
             mkdir -p artifacts
-            ls / /root-repo
-            sudo apt-get update -qy
             sudo apt-get install curl git -qy
 
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
