@@ -15,6 +15,6 @@ if cd lua-language-server; then
     ./compile/install.sh
     cd ../.. || exit
     ./3rd/luamake/luamake rebuild
-    cp -r bin doc log meta tools locale script /artifacts
-    cp debugger.lua main.lua
+    cp -r bin doc log meta tools locale script "${ARTIFACTS:=/artifacts}"
+    cp debugger.lua main.lua "$ARTIFACTS"
 fi

@@ -12,7 +12,7 @@ if cd lua; then
     git checkout "$checkout"
     make -j16
     mkdir -p "/artifacts/"{bin,lib,include}
-    cp lua /artifacts/bin
-    cp liblua.a /artifacts/lib
-    cp lua.h lualib.h lauxlib.h /artifacts/include
+    cp lua "${ARTIFACTS:=/artifacts}/bin"
+    cp liblua.a "$ARTIFACTS/lib"
+    cp lua.h lualib.h lauxlib.h "$ARTIFACTS/include"
 fi

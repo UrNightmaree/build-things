@@ -13,5 +13,5 @@ if cd helix; then
 
     cargo install --path helix-term || exit 1
     cp "$HOME/.cargo/bin/hx" /artifacts
-    cp -r runtime /artifacts
+    cp -r runtime "${ARTIFACTS:-/artifacts}"
 fi

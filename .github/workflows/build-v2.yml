@@ -1,0 +1,57 @@
+name: Build v2
+
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "what to build"
+        required: true
+      args:
+        description: "args passed to build-*.sh"
+        required: false
+      skip-installing-deps:
+        description: "skip installing deps (for debugging only)"
+        required: false
+        type: boolean
+
+jobs:
+  build:
+    name: building ${{ github.event.inputs.build }} (${{ matrix.image }})
+    permissions:
+      contents: read
+    runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix: 
+        image: [raspios_lite, raspios_lite_arm64]
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Building
+        id: building
+        uses: pguyot/arm-runner-action@v2.5.2
+        with:
+          base_image: ${{ matrix.image }}:2022-04-04
+          shell: /bin/bash
+          copy_artifact_path: artifacts
+          copy_artifact_dest: ./artifacts
+          commands: |
+            sudo apt-get update -qy
+            sudo apt-get install curl git -qy
+
+            if ! ${{ github.event.inputs.skip-installing-deps }}; then
+              sudo apt-get install build-essential -qy
+
+              [[ -e scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
+                bash scripts/install-deps-${{ github.event.inputs.build }}.sh
+            fi
+
+            ARTIFACTS=./artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
+
+
+      - name: Upload build result(s) as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.inputs.build }}-${{ matrix.image }}
+          path: ~/artifacts
