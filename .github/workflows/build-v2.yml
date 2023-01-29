@@ -36,7 +36,7 @@ jobs:
           shell: /bin/bash
           bind_mount_repository: true
           copy_repository_path: /root-repo
-          copy_repository_dest: $HOME/artifacts
+          copy_artifact_dest: $HOME/artifacts
           commands: |
             mkdir -p artifacts
             sudo apt-get install curl git -qy
