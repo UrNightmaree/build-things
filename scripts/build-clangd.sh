@@ -12,7 +12,7 @@ if cd llvm-project; then
     git checkout "$checkout"
     mkdir build
     cd build || exit
-    cmake ../llvm/ -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -G ninja
-    cmake --build . --target clangd -j16
+    cmake ../llvm/ -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="clang;clang-tools-extra" -G ninja || exit 1
+    cmake --build . --target clangd -j16 || exit 1
     ls -a
 fi
