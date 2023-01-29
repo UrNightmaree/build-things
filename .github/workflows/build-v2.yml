@@ -47,7 +47,7 @@ jobs:
                 bash scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
 
-            ARTIFACTS=./artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
+            ARTIFACTS=../artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
 
 
       - name: Upload build result(s) as artifacts
