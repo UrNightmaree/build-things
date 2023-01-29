@@ -4,4 +4,4 @@
 
 . scripts/util-cmd.sh
 
-sudoo apt-get install ninja-build  cmake-qy
+sudoo apt-get install ninja-build cmake -qy
