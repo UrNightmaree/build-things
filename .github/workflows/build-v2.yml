@@ -35,10 +35,12 @@ jobs:
           base_image: ${{ matrix.image }}:2022-04-04
           shell: /bin/bash
           bind_mount_repository: true
+          copy_repository_path: /root-repo
           copy_artifact_path: artifacts
           copy_artifact_dest: ./artifacts
           commands: |
             mkdir -p artifacts
+            ls / /root-repo
             sudo apt-get update -qy
             sudo apt-get install curl git -qy
 
@@ -49,7 +51,7 @@ jobs:
                 bash scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
 
-            ARTIFACTS=/build-things/artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
+            ARTIFACTS=/root-repo/artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
 
 
       - name: Upload build result(s) as artifacts
