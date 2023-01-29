@@ -38,6 +38,7 @@ jobs:
           copy_artifact_path: artifacts
           copy_artifact_dest: ./artifacts
           commands: |
+            mkdir -p artifacts
             sudo apt-get update -qy
             sudo apt-get install curl git -qy
 
@@ -48,7 +49,7 @@ jobs:
                 bash scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
 
-            ARTIFACTS=../artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
+            ARTIFACTS=/build-things/artifacts bash scripts/build-${{ github.event.inputs.build }}.sh
 
 
       - name: Upload build result(s) as artifacts
