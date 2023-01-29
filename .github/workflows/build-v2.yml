@@ -37,7 +37,6 @@ jobs:
           bind_mount_repository: true
           copy_repository_path: /root-repo
           copy_artifact_path: artifacts
-          copy_artifact_dest: ./artifacts
           commands: |
             mkdir -p artifacts
             ls / /root-repo
