@@ -43,8 +43,6 @@ jobs:
             sudo apt-get install curl git -qy
 
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
-              sudo apt-get install build-essential -qy
-
               [[ -e scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
                 bash scripts/install-deps-${{ github.event.inputs.build }}.sh
             fi
