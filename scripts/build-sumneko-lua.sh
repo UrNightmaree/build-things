@@ -6,7 +6,7 @@
 
 checkout="${1:-master}"
 
-git clone --depth=1 https://githun.com/sumneko/lua-language-server
+git clone --depth=1 https://github.com/sumneko/lua-language-server
 
 if cd lua-language-server; then
     git checkout "$checkout"
