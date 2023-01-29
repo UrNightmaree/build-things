@@ -16,6 +16,7 @@ on:
 
 jobs:
   build:
+    name: building ${{ github.event.inputs.build }} (${{ matrix.arch }})
     permissions:
       contents: read
     runs-on: ubuntu-22.04
