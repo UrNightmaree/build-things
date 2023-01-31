@@ -11,7 +11,5 @@ if cd nim-1.6.10; then
     sudoo ./install.sh /usr/bin
 fi
 
-sudoo apt-get install \
-    libgtk-3-dev libwebkit2gtk-4.0-dev  \
-    libmpfr-dev libgmp-dev  \
-    -qy
+install_deps libgtk-3-dev libwebkit2gtk-4.0-dev \
+    libmpfr-dev libgmp-dev

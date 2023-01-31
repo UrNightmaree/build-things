@@ -12,7 +12,7 @@ fast_cmd() {
 
 all:
 > $cmd $*"
-    make -j16 -f m || exit 1
+    make -j16 -f m || return 1
     rm m -f
 }
 
@@ -29,4 +29,9 @@ sudoo() {
     else
         exec "$cmd" "$@" || return 1
     fi
+}
+
+# install_deps [pkgs...]
+install_deps() {
+    sudoo apt-get install "$*" -qy || return 1
 }

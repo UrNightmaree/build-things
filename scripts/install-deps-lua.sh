@@ -4,4 +4,4 @@
 
 . scripts/util-cmd.sh
 
-sudoo apt-get install libreadline-dev -qy
+install_deps libreadline-dev

@@ -4,4 +4,4 @@
 
 . scripts/util-cmd.sh
 
-sudoo apt-get install ninja-build -qy
+install_deps ninja-build

@@ -39,6 +39,9 @@ jobs:
           copy_artifact_path: artifacts
           copy_artifact_dest: $HOME/artifacts
           commands: |
+            # fix $HOME being no file or directory
+            mkdir $HOME || printf '\x1b[1m$HOME exist!\x1b[0m\n'
+
             mkdir -p artifacts
             sudo apt-get install curl git -qy
 
