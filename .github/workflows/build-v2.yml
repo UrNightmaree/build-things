@@ -45,7 +45,7 @@ jobs:
             mkdir $HOME || printf '\x1b[1m$HOME exist!\x1b[0m\n'
 
             mkdir -p artifacts
-            sudo apt-get install curl git -qy
+            sudo apt-get install curl git -qy --no-install-recommends
 
             if ! ${{ github.event.inputs.skip-installing-deps }}; then
               [[ -e scripts/install-deps-${{ github.event.inputs.build }}.sh ]] &&
