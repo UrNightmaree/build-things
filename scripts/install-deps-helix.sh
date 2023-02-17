@@ -2,9 +2,6 @@
 
 # a script for installing helix deps
 
-curl -sSf https://sh.rustup.rs  \
-    > rustup.sh
-sh rustup.sh -y
+. env-rust.sh
 
-# shellcheck source=/dev/null
-source "$HOME/.cargo/env"
+curl -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path
