@@ -2,6 +2,7 @@
 
 # a script for installing helix deps
 
-curl -sSf https://sh.rustup.rs | bash -s -- -y
+curl -sSf https://sh.rustup.rs > rustup.sh
+sh rustup.sh -y
 
-export PATH="$HOME/.cargo/bin:$PATH"
+source "$HOME/.cargo/env"
