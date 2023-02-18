@@ -40,8 +40,6 @@ jobs:
           copy_artifact_dest: $HOME/artifacts
           image_additional_mb: 4096
           commands: |
-            export PATH="/opt/repo/scripts:$PATH"
-
             # fix $HOME being no file or directory
             mkdir $HOME || printf '\x1b[1m$HOME exist!\x1b[0m\n'
 

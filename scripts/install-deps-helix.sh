@@ -4,4 +4,4 @@
 
 curl -sSf https://sh.rustup.rs | bash -s -- -y
 
-source "$HOME/.cargo/env"
+export PATH="$HOME/.cargo/bin:$PATH"

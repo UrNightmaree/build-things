@@ -4,7 +4,7 @@
 
 checkout="${1:-master}"
 
-. util-cmd.sh
+. scripts/util-cmd.sh
 
 git clone https://github.com/helix-editor/helix
 
