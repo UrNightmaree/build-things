@@ -38,6 +38,7 @@ jobs:
           copy_repository_path: /opt/repo
           copy_artifact_path: artifacts
           copy_artifact_dest: $HOME/artifacts
+          image_additional_mb: 4096
           commands: |
             export PATH="/opt/repo/scripts:$PATH"
 
