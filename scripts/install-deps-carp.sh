@@ -4,4 +4,8 @@
 
 . scripts/util-cmd.sh
 
-install_deps haskell-stack ghc
+install_deps apt install build-essential libnuma1 libnuma-dev libtinfo-dev libtinfo5 libtinfo6 libc6-dev \
+    llvm clang ninja-build haskell-stack ghc
+
+stack update
+stack upgrade
