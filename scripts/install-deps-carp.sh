@@ -4,7 +4,7 @@
 
 . scripts/util-cmd.sh
 
-mkdir "$HOME/."{cabal,ghcup} -p
+mkdir "$HOME/."{cabal,ghcup}"/bin" -p
 
 curl -Lo "$HOME/.ghcup/bin/ghcup" https://downloads.haskell.org/~ghcup/armv7-linux-ghcup
 
