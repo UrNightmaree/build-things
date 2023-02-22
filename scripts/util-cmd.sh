@@ -33,5 +33,5 @@ sudoo() {
 
 # install_deps [pkgs...]
 install_deps() {
-    sudoo apt-get install "$*" -qy --no-install-recommends || return 1
+    sudoo apt-get install "$@" -qy --no-install-recommends || return 1
 }
