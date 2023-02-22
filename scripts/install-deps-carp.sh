@@ -4,7 +4,7 @@
 
 . scripts/util-cmd.sh
 
-install_deps build-essential libnuma1 libnuma-dev libtinfo-dev libtinfo5 libtinfo6 libc6-dev \
+install_deps libnuma1 libnuma-dev libtinfo-dev libtinfo5 libtinfo6 libc6-dev \
     llvm clang ninja-build haskell-stack ghc
 
 stack update
